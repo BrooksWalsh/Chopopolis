@@ -1,2 +1,2 @@
-# Chopopolis
-Choppy gaming unity fun time
+# Chopopolis: The hub for all that is choppy
+Howdy feller
