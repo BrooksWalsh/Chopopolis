@@ -1,21 +1,24 @@
 // abstract class for adding tower classes
 public class Towers {
-    protected PVector[] baseP = new PVector[4]; // top left, top right, bottom left, bottom right
+    protected PVector NW; // north west
+    protected PVector NE; // north east
+    protected PVector SW; // south west
+    protected PVector SE; // south east
     protected PVector midpoint;
-    protected int squareLength = 100;
+    public int squareLength = 100;
     
     public Towers(int x, int y) {
-        this.baseP[0] = new PVector(x, y);
-        this.baseP[1] = new PVector((x + squareLength), y);
-        this.baseP[2] = new PVector(x,(y + squareLength));
-        this.baseP[3] = new PVector((x + squareLength),(y + squareLength));
-        this.midpoint = new PVector(x + (squareLength / 2), y + (squareLength / 2));
+        NW = new PVector(x, y);
+        NE = new PVector((x + squareLength), y);
+        SW = new PVector(x,(y + squareLength));
+        SE = new PVector((x + squareLength),(y + squareLength));
+        midpoint = new PVector(x + (squareLength / 2), y + (squareLength / 2));
     }
     
     // square for base of tower
     public void drawBase() {
         fill(255);
-        square(baseP[0].x, baseP[0].y, squareLength);
+        square(NW.x, NW.y, squareLength);
     }
     
     // additional shapes for tower
@@ -39,10 +42,10 @@ public class CloseTowers extends Towers {
     }
     
     public void circleTest() {
-        this.addCenterCircle(80, ROYGBYV[6]);
-        this.addCenterCircle(60, ROYGBYV[5]);
-        this.addCenterCircle(40, ROYGBYV[4]);
-        this.addCenterCircle(20, ROYGBYV[3]);
+        addCenterCircle(80, ROYGBYV[6]);
+        addCenterCircle(60, ROYGBYV[5]);
+        addCenterCircle(40, ROYGBYV[4]);
+        addCenterCircle(20, ROYGBYV[3]);
     }
     
     // stuff about how close-range towers work/attack
@@ -52,14 +55,14 @@ public class FarTowers extends Towers {
     // constructor
     public FarTowers(int x, int y) {
         super(x,y);
-        }
+    }
     
     // testing method calls
     public void hazardTowerTest() {
-        this.addTriangle(this.baseP[2], this.baseP[3], this.midpoint, ROYGBYV[2]);
-        this.addTriangle(this.baseP[0], this.baseP[1], this.midpoint, ROYGBYV[2]);
-        this.addTriangle(this.baseP[0], this.baseP[2], this.midpoint, ROYGBYV[5]);
-        this.addTriangle(this.baseP[1], this.baseP[3], this.midpoint, ROYGBYV[5]);
-        }
-    // stuffabout how long-range towers work/attack (maybe fixed aim?) 
+        addTriangle(SW, SE, midpoint, ROYGBYV[2]);
+        addTriangle(NW, NE, midpoint, ROYGBYV[2]);
+        addTriangle(NW, SW, midpoint, ROYGBYV[5]);
+        addTriangle(NE, SE, midpoint, ROYGBYV[5]);
     }
+    // stuffabout how long-range towers work/attack (maybe fixed aim?) 
+}
